@@ -1,119 +1,86 @@
-const D = window.EGP;
+const D=window.EGP_V5;
 
-function embed(id,title){
-  if(!id) return `<div class="placeholder"><strong>Video coming soon</strong><span>YouTube embed will appear here.</span></div>`;
+function video(id,title){
+  if(!id) return `<div class="video-empty"><b>VIDEO COMING SOON</b>YOUTUBE ARCHIVE</div>`;
   return `<iframe loading="lazy" title="${title}" src="https://www.youtube-nocookie.com/embed/${id}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
 }
 
-const days=document.querySelector("#days");
-for(let i=1;i<=7;i++){
-  const el=document.createElement("article"); el.className="day reveal";
-  el.innerHTML=`<div class="day-label">DAY ${String(i).padStart(2,"0")}</div><div class="day-content"><h3>Day ${i}</h3><div class="video">${embed(D.videos["day"+i],`EGP Pilot Study Day ${i}`)}</div></div>`;
-  days.appendChild(el);
-}
-
-document.querySelector("#ceremonyVideo").innerHTML=embed(D.videos.awardsCeremony,"EGP Pilot Study Awards Ceremony");
-
-const rec=document.querySelector("#recognitions");
-D.recognitions.forEach((r,i)=>{
-  const el=document.createElement("article");el.className="honor reveal";
-  el.innerHTML=`<div class="honor-index">${String(i+1).padStart(2,"0")}</div><div class="honor-title">${r.title}</div><div class="honor-person"><h3>${r.name}</h3><p>${r.note}</p></div>`;
-  rec.appendChild(el);
+// Day archive
+const archive=document.querySelector("#dayArchive");
+D.days.forEach((d,i)=>{
+  const row=document.createElement("article");
+  row.className="day-row reveal";
+  row.innerHTML=`<div class="day-no">${d.day}</div><div class="day-copy"><h3>${d.title}</h3><p>${d.note}</p></div><div class="video">${video(D.videos["day"+(i+1)],`EGP Pilot Study Day ${i+1}`)}</div>`;
+  archive.appendChild(row);
 });
 
-const team=document.querySelector("#teamCards");
+// Recognition
+const recognition=document.querySelector("#recognitionList");
+D.recognitions.forEach((r,i)=>{
+  const el=document.createElement("article");
+  el.className="recognition-item reveal";
+  el.innerHTML=`<div class="idx">${String(i+1).padStart(2,"0")}</div><div class="honor">${r.title}</div><div><h3>${r.name}</h3><p>${r.note}</p></div>`;
+  recognition.appendChild(el);
+});
+
+// Ceremony
+document.querySelector("#ceremony").innerHTML=video(D.videos.awardsCeremony,"EGP Awards Ceremony");
+
+// Photos
+const strip=document.querySelector("#photoStrip");
+if(!D.awardsPhotos.length) strip.innerHTML=`<div class="photo-empty">AWARD SESSION PHOTOGRAPHS WILL APPEAR HERE.</div>`;
+else D.awardsPhotos.forEach((src,i)=>{const im=document.createElement("img");im.src=src;im.alt=`Award session photograph ${i+1}`;im.loading="lazy";strip.appendChild(im)});
+
+// Team
+const team=document.querySelector("#teamGrid");
 D.team.forEach(t=>{
-  const el=document.createElement("article");el.className="person reveal";
-  el.innerHTML=`<img src="${t.image}" alt="${t.name}"><div class="person-copy"><h3>${t.name}</h3><div class="person-role">${t.role}</div><p>${t.bio}</p></div>`;
+  const el=document.createElement("article");el.className="team-person reveal";
+  el.innerHTML=`<img src="${t.image}" alt="${t.name}"><div class="info"><h3>${t.name}</h3><div class="role">${t.role}</div><p>${t.bio}</p></div>`;
   team.appendChild(el);
 });
 
-const gal=document.querySelector("#gallery");
-if(!D.awardsPhotos.length) gal.innerHTML=`<div class="gallery-empty">Award ceremony photographs will appear here once added to <code>assets/images/awards/</code>.</div>`;
-else D.awardsPhotos.forEach((src,i)=>{let im=document.createElement("img");im.src=src;im.alt=`Award ceremony photo ${i+1}`;im.loading="lazy";gal.appendChild(im)});
+// Reveal
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll(".reveal").forEach((e,i)=>{e.style.transitionDelay=(i%3)*70+"ms";io.observe(e)});
 
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target)}}),{threshold:.08});
-document.querySelectorAll(".reveal").forEach(e=>io.observe(e));
+// Navigation
+const trigger=document.querySelector(".nav-trigger"),panel=document.querySelector(".nav-panel");
+function toggleNav(force){
+  const open=force ?? !panel.classList.contains("open");
+  panel.classList.toggle("open",open);trigger.classList.toggle("open",open);panel.setAttribute("aria-hidden",String(!open));
+}
+trigger.onclick=()=>toggleNav();
+panel.querySelectorAll("a").forEach(a=>a.onclick=()=>toggleNav(false));
 
-const menu=document.querySelector(".menu"),nav=document.querySelector(".topbar nav");
-menu.onclick=()=>nav.classList.toggle("open");
-nav.querySelectorAll("a").forEach(a=>a.onclick=()=>nav.classList.remove("open"));
+// Scene label
+const sceneName=document.querySelector("#sceneName");
+const scenes=[...document.querySelectorAll("[data-scene]")];
+const sceneIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)sceneName.textContent=e.target.dataset.scene});
+},{threshold:.5});
+scenes.forEach(s=>sceneIO.observe(s));
 
-const glow=document.querySelector(".cursor-glow");
-window.addEventListener("pointermove",e=>{glow.style.left=e.clientX+"px";glow.style.top=e.clientY+"px"});
-
-
-// V3: navbar morph on scroll
-const topbar = document.querySelector(".topbar");
-window.addEventListener("scroll", () => {
-  topbar.classList.toggle("scrolled", window.scrollY > 45);
-}, {passive:true});
-
-// V3: subtle parallax for the giant 50 and background EGP lettering
-const giant50 = document.querySelector(".fifty");
-const bgEGP = document.querySelector(".numbers-bg");
-let ticking = false;
-function auraParallax(){
-  const y = window.scrollY;
-  if(giant50){
-    const r = giant50.getBoundingClientRect();
-    const delta = (window.innerHeight/2 - (r.top+r.height/2)) * 0.035;
-    giant50.style.transform = `translateX(-4vw) translateY(${delta}px)`;
-  }
-  if(bgEGP){
-    const r = bgEGP.parentElement.getBoundingClientRect();
-    const delta = (window.innerHeight/2 - (r.top+r.height/2)) * 0.045;
-    bgEGP.style.transform = `translateY(${delta}px)`;
+// Scroll progress + horizontal study documentary
+const progress=document.querySelector(".progress span");
+const study=document.querySelector(".study");
+const track=document.querySelector(".study-track");
+let ticking=false;
+function onScroll(){
+  const max=document.documentElement.scrollHeight-innerHeight;
+  progress.style.width=(scrollY/max*100)+"%";
+  if(study && track && innerWidth>850){
+    const r=study.getBoundingClientRect();
+    const available=study.offsetHeight-innerHeight;
+    const local=Math.min(1,Math.max(0,-r.top/available));
+    const maxShift=Math.max(0,track.scrollWidth-innerWidth*.78);
+    track.style.transform=`translateX(${-local*maxShift}px)`;
   }
   ticking=false;
 }
-window.addEventListener("scroll",()=>{
-  if(!ticking){requestAnimationFrame(auraParallax);ticking=true}
-},{passive:true});
-auraParallax();
+addEventListener("scroll",()=>{if(!ticking){requestAnimationFrame(onScroll);ticking=true}},{passive:true});onScroll();
 
-// V3: award gallery lightbox
-const lightbox=document.querySelector("#lightbox");
-const lightboxImage=document.querySelector("#lightboxImage");
-const closeLightbox=document.querySelector(".lightbox-close");
-function shutLightbox(){lightbox.classList.remove("open");lightbox.setAttribute("aria-hidden","true")}
-document.querySelector("#gallery").addEventListener("click",e=>{
-  if(e.target.tagName==="IMG"){
-    lightboxImage.src=e.target.src;
-    lightboxImage.alt=e.target.alt;
-    lightbox.classList.add("open");
-    lightbox.setAttribute("aria-hidden","false");
-  }
-});
-closeLightbox.addEventListener("click",shutLightbox);
-lightbox.addEventListener("click",e=>{if(e.target===lightbox) shutLightbox()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape") shutLightbox()});
-
-
-// V4 — restrained premium motion
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const desktopMotion = window.matchMedia("(min-width: 901px)").matches;
-
-if(!reducedMotion && desktopMotion){
-  let v4Tick=false;
-  const heroTitle=document.querySelector(".hero h1");
-  window.addEventListener("scroll",()=>{
-    if(v4Tick) return;
-    v4Tick=true;
-    requestAnimationFrame(()=>{
-      const y=window.scrollY;
-      if(heroTitle && y < window.innerHeight*1.2){
-        heroTitle.style.transform=`translateY(${y*.035}px)`;
-        heroTitle.style.opacity=String(Math.max(.25,1-y/(window.innerHeight*1.15)));
-      }
-      v4Tick=false;
-    });
-  },{passive:true});
-}
-
-// Stagger direct children in key editorial sequences.
-document.querySelectorAll(".number-grid,.recognitions").forEach(group=>{
-  [...group.children].forEach((el,i)=>{
-    el.style.transitionDelay=`${Math.min(i*70,280)}ms`;
-  });
-});
+// Lightbox
+const lb=document.querySelector("#lightbox"),lbimg=lb.querySelector("img");
+strip.addEventListener("click",e=>{if(e.target.tagName==="IMG"){lbimg.src=e.target.src;lb.classList.add("open");lb.setAttribute("aria-hidden","false")}});
+function closeLB(){lb.classList.remove("open");lb.setAttribute("aria-hidden","true")}
+lb.querySelector("button").onclick=closeLB;lb.onclick=e=>{if(e.target===lb)closeLB()};addEventListener("keydown",e=>{if(e.key==="Escape")closeLB()});

@@ -1,35 +1,36 @@
-# Euler's Golden Pie Pilot Study — V4 Ultimate
+# Euler's Golden Pie Pilot Study — V5 Experimental
 
-V4 is the studio-grade refinement pass. It deliberately keeps the V2/V3 identity rather than redesigning the site again.
+This is intentionally **not** V4 with another polish layer.
 
-## What changed
-- Logo is now genuinely prominent: ~390px desktop, with a refined scroll state
-- Hero rebuilt into a more editorial, asymmetric poster composition
-- Stronger typography hierarchy and whitespace
-- More restrained gold lighting
-- Cleaner architectural Pilot Study at a Glance section
-- More editorial study-process rail
-- Seven-day videos remain condensed in a two-column desktop archive
-- 50-Digit Finale rebuilt as a full-width cinematic centerpiece
-- Participant Recognition strengthened without rankings or podium language
-- Awards Ceremony redesigned as a true theater/cinema moment
-- Team portraits refined into magazine-style profiles
-- Stronger closing sequence
-- Refined micro-interactions and scroll behavior
-- Reduced-motion accessibility support
-- Mobile layouts re-tuned for the larger brand treatment
+V5 rebuilds the experience as an interactive documentary/archive:
+- New black / parchment / gold visual system
+- New HUD navigation with live scene labels
+- Full-screen documentary opening
+- Light-background Origin chapter
+- Sticky horizontal Study sequence
+- Giant `10` interlude
+- Editorial seven-day film archive
+- Monumental 50-digit sequence
+- Non-ranking Participant Recognition
+- Cinema-style Awards chapter
+- Editorial photo archive + lightbox
+- Light-background Team chapter
+- Film-credit-style acknowledgments
+- Full-screen closing archive sequence
+- Scroll progress indicator
+- Responsive mobile layout
+- Reduced-motion support
+- Vanilla HTML/CSS/JS; GitHub Pages compatible
 
 ## Content
-Continue editing `data/site-data.js` for:
-- Day 1–7 YouTube IDs
-- Awards Ceremony YouTube ID
-- Participant recognition names/titles/descriptions
-- Team roles and bios
-- Award-photo filenames
+Edit `data/site-data.js` for all YouTube IDs, day descriptions, recognitions, team bios, and award photos.
 
 ## Assets
-- Replace `official_logo.png` with the real EGP logo.
-- Replace the placeholder team photos.
-- Put award photos in `assets/images/awards/`.
+Replace:
+- `official_logo.png`
+- `assets/images/team/sid.jpg`
+- `assets/images/team/avanthika.jpg`
 
-All paths remain relative for GitHub Pages and future integration under `/pilot-study/`.
+Add award photographs to `assets/images/awards/`, then list them in `awardsPhotos`.
+
+V4 remains a separate design direction. V5 is the alternate experimental beast.
