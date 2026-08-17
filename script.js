@@ -41,3 +41,50 @@ nav.querySelectorAll("a").forEach(a=>a.onclick=()=>nav.classList.remove("open"))
 
 const glow=document.querySelector(".cursor-glow");
 window.addEventListener("pointermove",e=>{glow.style.left=e.clientX+"px";glow.style.top=e.clientY+"px"});
+
+
+// V3: navbar morph on scroll
+const topbar = document.querySelector(".topbar");
+window.addEventListener("scroll", () => {
+  topbar.classList.toggle("scrolled", window.scrollY > 45);
+}, {passive:true});
+
+// V3: subtle parallax for the giant 50 and background EGP lettering
+const giant50 = document.querySelector(".fifty");
+const bgEGP = document.querySelector(".numbers-bg");
+let ticking = false;
+function auraParallax(){
+  const y = window.scrollY;
+  if(giant50){
+    const r = giant50.getBoundingClientRect();
+    const delta = (window.innerHeight/2 - (r.top+r.height/2)) * 0.035;
+    giant50.style.transform = `translateX(-4vw) translateY(${delta}px)`;
+  }
+  if(bgEGP){
+    const r = bgEGP.parentElement.getBoundingClientRect();
+    const delta = (window.innerHeight/2 - (r.top+r.height/2)) * 0.045;
+    bgEGP.style.transform = `translateY(${delta}px)`;
+  }
+  ticking=false;
+}
+window.addEventListener("scroll",()=>{
+  if(!ticking){requestAnimationFrame(auraParallax);ticking=true}
+},{passive:true});
+auraParallax();
+
+// V3: award gallery lightbox
+const lightbox=document.querySelector("#lightbox");
+const lightboxImage=document.querySelector("#lightboxImage");
+const closeLightbox=document.querySelector(".lightbox-close");
+function shutLightbox(){lightbox.classList.remove("open");lightbox.setAttribute("aria-hidden","true")}
+document.querySelector("#gallery").addEventListener("click",e=>{
+  if(e.target.tagName==="IMG"){
+    lightboxImage.src=e.target.src;
+    lightboxImage.alt=e.target.alt;
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden","false");
+  }
+});
+closeLightbox.addEventListener("click",shutLightbox);
+lightbox.addEventListener("click",e=>{if(e.target===lightbox) shutLightbox()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape") shutLightbox()});

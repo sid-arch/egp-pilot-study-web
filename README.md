@@ -1,38 +1,40 @@
-# Euler's Golden Pie Pilot Study — V2
+# Euler's Golden Pie Pilot Study — V3
 
-V2 is a complete UI redesign with the V1 content structure retained.
+V3 keeps the V2 visual identity and pushes the premium/cinematic direction further.
 
-## V2 changes
-- Completely rebuilt cinematic navy/gold interface
-- Removed podium / winners / Hall of Champions
-- Added Participant Recognition with descriptive honors
-- Full-screen opening and closing sequences
-- Editorial study-process layout
-- Redesigned seven-day video archive
-- Dedicated 50-digit finale
-- Cinematic Awards Ceremony video
-- Mosaic award-photo gallery
-- Redesigned Sid + Avanthika profiles
-- Responsive mobile navigation
-- Scroll reveals and subtle pointer lighting
+## V3 changes
+- Removed the entire “Before & After” assessment section
+- Renumbered subsequent sections
+- Increased official logo presence in the navigation
+- Condensed the seven Day 1–7 video cards into a two-column desktop archive
+- Added richer hover/micro-interactions
+- Added subtle scroll parallax to the giant `50` and background `EGP`
+- Upgraded the 50-Digit Finale presentation
+- Refined Participant Recognition into cinematic award-style reveals
+- Upgraded Awards Ceremony into a darker cinema presentation
+- Added editorial photo hover behavior
+- Added fullscreen award-photo lightbox
+- Navbar now subtly changes as the page scrolls
+- Stronger gold lighting and section-line animations
+- Darker, more dramatic ending
+- Preserved responsive/mobile behavior
 
-## Content control
-Edit `data/site-data.js`.
+## Updating content
+All variable content remains in `data/site-data.js`.
 
-### YouTube
-Paste only each video's YouTube ID. Empty values show a clean "Video coming soon" state.
+### YouTube videos
+Paste only YouTube video IDs. Empty IDs display “Video coming soon.”
 
-### Recognitions
-Replace the sample participant names, titles, and descriptions in `recognitions`.
+### Participant Recognition
+Edit the `recognitions` array. This is intentionally not a winner/podium system.
 
 ### Award photos
-Put photos in `assets/images/awards/`, then list their relative paths in `awardsPhotos`.
+Place photos in `assets/images/awards/` and list their paths under `awardsPhotos`.
 
-### Team
-Replace `assets/images/team/sid.jpg` and `avanthika.jpg`, then edit the bios/roles in `site-data.js`.
+### Team photos
+Replace:
+- `assets/images/team/sid.jpg`
+- `assets/images/team/avanthika.jpg`
 
 ### Logo
-Replace the placeholder `official_logo.png` with the actual official EGP logo using the exact same filename.
-
-## GitHub Pages
-All links are relative, so this can be deployed as its own Pages repository or later placed under the official site's `/pilot-study/` directory.
+Replace the placeholder `official_logo.png` with the real official logo, keeping the same filename.
