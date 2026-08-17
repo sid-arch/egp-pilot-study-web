@@ -88,3 +88,32 @@ document.querySelector("#gallery").addEventListener("click",e=>{
 closeLightbox.addEventListener("click",shutLightbox);
 lightbox.addEventListener("click",e=>{if(e.target===lightbox) shutLightbox()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape") shutLightbox()});
+
+
+// V4 — restrained premium motion
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const desktopMotion = window.matchMedia("(min-width: 901px)").matches;
+
+if(!reducedMotion && desktopMotion){
+  let v4Tick=false;
+  const heroTitle=document.querySelector(".hero h1");
+  window.addEventListener("scroll",()=>{
+    if(v4Tick) return;
+    v4Tick=true;
+    requestAnimationFrame(()=>{
+      const y=window.scrollY;
+      if(heroTitle && y < window.innerHeight*1.2){
+        heroTitle.style.transform=`translateY(${y*.035}px)`;
+        heroTitle.style.opacity=String(Math.max(.25,1-y/(window.innerHeight*1.15)));
+      }
+      v4Tick=false;
+    });
+  },{passive:true});
+}
+
+// Stagger direct children in key editorial sequences.
+document.querySelectorAll(".number-grid,.recognitions").forEach(group=>{
+  [...group.children].forEach((el,i)=>{
+    el.style.transitionDelay=`${Math.min(i*70,280)}ms`;
+  });
+});

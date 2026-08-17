@@ -1,40 +1,35 @@
-# Euler's Golden Pie Pilot Study — V3
+# Euler's Golden Pie Pilot Study — V4 Ultimate
 
-V3 keeps the V2 visual identity and pushes the premium/cinematic direction further.
+V4 is the studio-grade refinement pass. It deliberately keeps the V2/V3 identity rather than redesigning the site again.
 
-## V3 changes
-- Removed the entire “Before & After” assessment section
-- Renumbered subsequent sections
-- Increased official logo presence in the navigation
-- Condensed the seven Day 1–7 video cards into a two-column desktop archive
-- Added richer hover/micro-interactions
-- Added subtle scroll parallax to the giant `50` and background `EGP`
-- Upgraded the 50-Digit Finale presentation
-- Refined Participant Recognition into cinematic award-style reveals
-- Upgraded Awards Ceremony into a darker cinema presentation
-- Added editorial photo hover behavior
-- Added fullscreen award-photo lightbox
-- Navbar now subtly changes as the page scrolls
-- Stronger gold lighting and section-line animations
-- Darker, more dramatic ending
-- Preserved responsive/mobile behavior
+## What changed
+- Logo is now genuinely prominent: ~390px desktop, with a refined scroll state
+- Hero rebuilt into a more editorial, asymmetric poster composition
+- Stronger typography hierarchy and whitespace
+- More restrained gold lighting
+- Cleaner architectural Pilot Study at a Glance section
+- More editorial study-process rail
+- Seven-day videos remain condensed in a two-column desktop archive
+- 50-Digit Finale rebuilt as a full-width cinematic centerpiece
+- Participant Recognition strengthened without rankings or podium language
+- Awards Ceremony redesigned as a true theater/cinema moment
+- Team portraits refined into magazine-style profiles
+- Stronger closing sequence
+- Refined micro-interactions and scroll behavior
+- Reduced-motion accessibility support
+- Mobile layouts re-tuned for the larger brand treatment
 
-## Updating content
-All variable content remains in `data/site-data.js`.
+## Content
+Continue editing `data/site-data.js` for:
+- Day 1–7 YouTube IDs
+- Awards Ceremony YouTube ID
+- Participant recognition names/titles/descriptions
+- Team roles and bios
+- Award-photo filenames
 
-### YouTube videos
-Paste only YouTube video IDs. Empty IDs display “Video coming soon.”
+## Assets
+- Replace `official_logo.png` with the real EGP logo.
+- Replace the placeholder team photos.
+- Put award photos in `assets/images/awards/`.
 
-### Participant Recognition
-Edit the `recognitions` array. This is intentionally not a winner/podium system.
-
-### Award photos
-Place photos in `assets/images/awards/` and list their paths under `awardsPhotos`.
-
-### Team photos
-Replace:
-- `assets/images/team/sid.jpg`
-- `assets/images/team/avanthika.jpg`
-
-### Logo
-Replace the placeholder `official_logo.png` with the real official logo, keeping the same filename.
+All paths remain relative for GitHub Pages and future integration under `/pilot-study/`.
