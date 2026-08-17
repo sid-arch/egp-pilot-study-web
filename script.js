@@ -1,82 +1,43 @@
-const data = window.EGP_DATA;
+const D = window.EGP;
 
-function youtubeEmbed(id, title) {
-  if (!id) {
-    return `<div class="video-placeholder"><strong>Video coming soon</strong><span>Add the YouTube video ID in <code>data/site-data.js</code>.</span></div>`;
-  }
-  return `<iframe src="https://www.youtube-nocookie.com/embed/${id}" title="${title}" loading="lazy"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+function embed(id,title){
+  if(!id) return `<div class="placeholder"><strong>Video coming soon</strong><span>YouTube embed will appear here.</span></div>`;
+  return `<iframe loading="lazy" title="${title}" src="https://www.youtube-nocookie.com/embed/${id}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
 }
 
-const videoGrid = document.getElementById("videoGrid");
-for (let i = 1; i <= 7; i++) {
-  const id = data.videos[`day${i}`];
-  const card = document.createElement("article");
-  card.className = "day-card reveal";
-  card.innerHTML = `
-    <div class="video-shell">${youtubeEmbed(id, `Euler's Golden Pie Pilot Study Day ${i}`)}</div>
-    <div class="copy">
-      <div class="day-num">DAY ${String(i).padStart(2,"0")}</div>
-      <h3>Day ${i}</h3>
-      <p>Replace this with the final Day ${i} session description.</p>
-    </div>`;
-  videoGrid.appendChild(card);
+const days=document.querySelector("#days");
+for(let i=1;i<=7;i++){
+  const el=document.createElement("article"); el.className="day reveal";
+  el.innerHTML=`<div class="day-label">DAY ${String(i).padStart(2,"0")}</div><div class="day-content"><h3>Day ${i}</h3><div class="video">${embed(D.videos["day"+i],`EGP Pilot Study Day ${i}`)}</div></div>`;
+  days.appendChild(el);
 }
 
-document.getElementById("awardsVideo").innerHTML =
-  youtubeEmbed(data.videos.awardsCeremony, "Euler's Golden Pie Pilot Study Awards Ceremony");
+document.querySelector("#ceremonyVideo").innerHTML=embed(D.videos.awardsCeremony,"EGP Pilot Study Awards Ceremony");
 
-const winnerGrid = document.getElementById("winnerGrid");
-data.winners.forEach(w => {
-  const el = document.createElement("article");
-  el.className = "winner reveal";
-  el.innerHTML = `<div class="place">${w.place}</div><h3>${w.name}</h3><p>${w.title}</p>`;
-  winnerGrid.appendChild(el);
+const rec=document.querySelector("#recognitions");
+D.recognitions.forEach((r,i)=>{
+  const el=document.createElement("article");el.className="honor reveal";
+  el.innerHTML=`<div class="honor-index">${String(i+1).padStart(2,"0")}</div><div class="honor-title">${r.title}</div><div class="honor-person"><h3>${r.name}</h3><p>${r.note}</p></div>`;
+  rec.appendChild(el);
 });
 
-const teamGrid = document.getElementById("teamGrid");
-data.team.forEach(t => {
-  const el = document.createElement("article");
-  el.className = "team-card reveal";
-  el.innerHTML = `
-    <img src="${t.image}" alt="${t.name}">
-    <div class="team-copy">
-      <h3>${t.name}</h3>
-      <div class="role">${t.role}</div>
-      <p>${t.description}</p>
-    </div>`;
-  teamGrid.appendChild(el);
+const team=document.querySelector("#teamCards");
+D.team.forEach(t=>{
+  const el=document.createElement("article");el.className="person reveal";
+  el.innerHTML=`<img src="${t.image}" alt="${t.name}"><div class="person-copy"><h3>${t.name}</h3><div class="person-role">${t.role}</div><p>${t.bio}</p></div>`;
+  team.appendChild(el);
 });
 
-const gallery = document.getElementById("awardsGallery");
-if (!data.awardsPhotos.length) {
-  gallery.innerHTML = `<div class="empty-gallery">Award photos will appear here after you add them to <code>assets/images/awards/</code> and list the filenames in <code>data/site-data.js</code>.</div>`;
-} else {
-  data.awardsPhotos.forEach((src, i) => {
-    const img = document.createElement("img");
-    img.src = src;
-    img.alt = `Euler's Golden Pie award ceremony photo ${i+1}`;
-    img.loading = "lazy";
-    gallery.appendChild(img);
-  });
-}
+const gal=document.querySelector("#gallery");
+if(!D.awardsPhotos.length) gal.innerHTML=`<div class="gallery-empty">Award ceremony photographs will appear here once added to <code>assets/images/awards/</code>.</div>`;
+else D.awardsPhotos.forEach((src,i)=>{let im=document.createElement("img");im.src=src;im.alt=`Award ceremony photo ${i+1}`;im.loading="lazy";gal.appendChild(im)});
 
-const menuBtn = document.querySelector(".menu-btn");
-const navLinks = document.querySelector(".nav-links");
-menuBtn.addEventListener("click", () => {
-  const open = navLinks.classList.toggle("open");
-  menuBtn.setAttribute("aria-expanded", String(open));
-});
-document.querySelectorAll(".nav-links a").forEach(a => a.addEventListener("click", () => navLinks.classList.remove("open")));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll(".reveal").forEach(e=>io.observe(e));
 
-document.querySelectorAll(".section, .day-card, .winner, .team-card").forEach(el => el.classList.add("reveal"));
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("in");
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: .08 });
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+const menu=document.querySelector(".menu"),nav=document.querySelector(".topbar nav");
+menu.onclick=()=>nav.classList.toggle("open");
+nav.querySelectorAll("a").forEach(a=>a.onclick=()=>nav.classList.remove("open"));
+
+const glow=document.querySelector(".cursor-glow");
+window.addEventListener("pointermove",e=>{glow.style.left=e.clientX+"px";glow.style.top=e.clientY+"px"});

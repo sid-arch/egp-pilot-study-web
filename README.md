@@ -1,40 +1,38 @@
-# Euler's Golden Pie Pilot Study — V1
+# Euler's Golden Pie Pilot Study — V2
 
-Static GitHub Pages build.
+V2 is a complete UI redesign with the V1 content structure retained.
 
-## Main files
-- `index.html` — page structure
-- `style.css` — design
-- `script.js` — embeds, winners, gallery, animations
-- `data/site-data.js` — editable content/data
-- `official_logo.png` — replace this placeholder with the real official EGP logo
+## V2 changes
+- Completely rebuilt cinematic navy/gold interface
+- Removed podium / winners / Hall of Champions
+- Added Participant Recognition with descriptive honors
+- Full-screen opening and closing sequences
+- Editorial study-process layout
+- Redesigned seven-day video archive
+- Dedicated 50-digit finale
+- Cinematic Awards Ceremony video
+- Mosaic award-photo gallery
+- Redesigned Sid + Avanthika profiles
+- Responsive mobile navigation
+- Scroll reveals and subtle pointer lighting
 
-## Add YouTube videos
-Open `data/site-data.js` and paste only the YouTube video ID for each day and the awards ceremony.
+## Content control
+Edit `data/site-data.js`.
 
-Example:
-```js
-day1: "dQw4w9WgXcQ"
-```
+### YouTube
+Paste only each video's YouTube ID. Empty values show a clean "Video coming soon" state.
 
-Days with an empty string automatically show "Video coming soon".
+### Recognitions
+Replace the sample participant names, titles, and descriptions in `recognitions`.
 
-## Add award photos
-1. Put the files in `assets/images/awards/`
-2. Add their paths to `awardsPhotos` in `data/site-data.js`
+### Award photos
+Put photos in `assets/images/awards/`, then list their relative paths in `awardsPhotos`.
 
-Example:
-```js
-awardsPhotos: [
-  "assets/images/awards/award-01.jpg",
-  "assets/images/awards/award-02.jpg"
-]
-```
+### Team
+Replace `assets/images/team/sid.jpg` and `avanthika.jpg`, then edit the bios/roles in `site-data.js`.
 
-## Replace team photos
-Replace:
-- `assets/images/team/sid.jpg`
-- `assets/images/team/avanthika.jpg`
+### Logo
+Replace the placeholder `official_logo.png` with the actual official EGP logo using the exact same filename.
 
-## Publish
-Upload the folder contents to the GitHub Pages repo. If this will live at `/pilot-study/`, the relative paths already work.
+## GitHub Pages
+All links are relative, so this can be deployed as its own Pages repository or later placed under the official site's `/pilot-study/` directory.
