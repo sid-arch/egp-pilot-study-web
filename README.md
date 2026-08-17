@@ -1,36 +1,30 @@
-# Euler's Golden Pie Pilot Study — V5 Experimental
+# Euler's Golden Pie Pilot Study — V6
 
-This is intentionally **not** V4 with another polish layer.
+## Direction
+**V4 body + V5 soul.**
 
-V5 rebuilds the experience as an interactive documentary/archive:
-- New black / parchment / gold visual system
-- New HUD navigation with live scene labels
-- Full-screen documentary opening
-- Light-background Origin chapter
-- Sticky horizontal Study sequence
-- Giant `10` interlude
-- Editorial seven-day film archive
-- Monumental 50-digit sequence
-- Non-ranking Participant Recognition
-- Cinema-style Awards chapter
-- Editorial photo archive + lightbox
-- Light-background Team chapter
-- Film-credit-style acknowledgments
-- Full-screen closing archive sequence
-- Scroll progress indicator
-- Responsive mobile layout
-- Reduced-motion support
-- Vanilla HTML/CSS/JS; GitHub Pages compatible
+V6 returns to the premium dark navy / gold V4 interface and integrates the strongest storytelling language from V5.
+
+### Core V6 decisions
+- V4 is the visual baseline.
+- V5's cinematic copy is used throughout.
+- `ARCHIVE_001` is removed.
+- Large EGP logo retained.
+- Hero typography rebuilt so lines cannot overlap.
+- Random right-side process arrows removed completely.
+- Seven-day videos remain condensed in the V4 two-column desktop archive.
+- No V5 cream/white Origin layout or giant dead whitespace.
+- No V5 experimental horizontal-scrolling architecture.
+- V4 50-digit centerpiece retained with V5's stronger finale copy.
+- V4 recognition layout retained with V5's “No podium. Different strengths.” language.
+- V4 awards theater retained with V5's stronger ceremony copy.
+- V4 dark/navy/gold visual identity retained from start to finish.
 
 ## Content
-Edit `data/site-data.js` for all YouTube IDs, day descriptions, recognitions, team bios, and award photos.
+Edit `data/site-data.js` for:
+- YouTube video IDs
+- participant recognition
+- team bios/roles
+- award photographs
 
-## Assets
-Replace:
-- `official_logo.png`
-- `assets/images/team/sid.jpg`
-- `assets/images/team/avanthika.jpg`
-
-Add award photographs to `assets/images/awards/`, then list them in `awardsPhotos`.
-
-V4 remains a separate design direction. V5 is the alternate experimental beast.
+Replace `official_logo.png` with the official EGP logo using the same filename.
