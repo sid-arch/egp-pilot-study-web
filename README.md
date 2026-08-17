@@ -1,46 +1,35 @@
-# Euler's Golden Pie Pilot Study — FINAL
+# Euler's Golden Pie Pilot Study — V7
 
-This is the final production branch.
+V7 changes the information architecture around one principle:
 
-## Final design formula
-**V4 visual system + V5 storytelling + V6 corrections + final polish.**
+**Screen 1: understand the pilot. Everything after: experience it.**
 
-### Locked decisions
-- Premium dark navy / gold interface
-- Large EGP logo
-- Hero uses: “We built a memory game. Then we tested it.”
-- Hero typography is collision-safe
-- No `ARCHIVE_001`
-- No random process arrows
-- No “No podium” language
-- Participant Recognition uses:
-  - “Different minds. Different strengths.”
-- Seven-day YouTube archive remains condensed
-- 50-Digit Finale keeps the cinematic V4 presentation
-- Awards Ceremony remains theater-style
-- Team section keeps the premium editorial treatment
-- Acknowledgments are intentionally concise
-- Acknowledgments fade seamlessly into the final section with no visible seam
-- Final line remains:
-  - “The first pilot is now history.”
+## Structure
+1. One-view Pilot Study overview
+   - What EGP is
+   - 10 participants
+   - 7 training days
+   - Pre/Post assessments
+   - 50-digit finale
+   - Learn → Build Stories → Practice → Recall → Assess
+   - One-sentence pilot summary
+2. Seven-Day Journey — compact YouTube archive
+3. 50-Digit Finale — cinematic 50 + finale video
+4. Award Session — photo gallery
+5. Participant Recognition
+6. People Behind the Pilot — Sid + Avanthika
+7. Thank You
+8. Final closing statement
 
-## Content editing
-Use `data/site-data.js` for:
+## Philosophy
+The old site required visitors to scroll through multiple explanatory sections before understanding the study. V7 intentionally removes that repetition. The opening viewport functions like a premium infographic / executive summary.
+
+## Content
+Edit `data/site-data.js` for:
 - Day 1–7 YouTube IDs
-- Awards Ceremony YouTube ID
-- Participant recognition titles and names
-- Team roles/bios
-- Award-photo paths
+- Finale YouTube ID
+- Participant recognition
+- Team bios
+- Award photo paths
 
-## Assets
-Replace:
-- `official_logo.png`
-- `assets/images/team/sid.jpg`
-- `assets/images/team/avanthika.jpg`
-
-Put award photos in:
-- `assets/images/awards/`
-
-Then list them in `data/site-data.js`.
-
-All paths remain GitHub Pages compatible.
+Replace the placeholder `official_logo.png` and team images with the final assets.
