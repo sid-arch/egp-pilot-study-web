@@ -1,30 +1,46 @@
-# Euler's Golden Pie Pilot Study — V6
+# Euler's Golden Pie Pilot Study — FINAL
 
-## Direction
-**V4 body + V5 soul.**
+This is the final production branch.
 
-V6 returns to the premium dark navy / gold V4 interface and integrates the strongest storytelling language from V5.
+## Final design formula
+**V4 visual system + V5 storytelling + V6 corrections + final polish.**
 
-### Core V6 decisions
-- V4 is the visual baseline.
-- V5's cinematic copy is used throughout.
-- `ARCHIVE_001` is removed.
-- Large EGP logo retained.
-- Hero typography rebuilt so lines cannot overlap.
-- Random right-side process arrows removed completely.
-- Seven-day videos remain condensed in the V4 two-column desktop archive.
-- No V5 cream/white Origin layout or giant dead whitespace.
-- No V5 experimental horizontal-scrolling architecture.
-- V4 50-digit centerpiece retained with V5's stronger finale copy.
-- V4 recognition layout retained with V5's “No podium. Different strengths.” language.
-- V4 awards theater retained with V5's stronger ceremony copy.
-- V4 dark/navy/gold visual identity retained from start to finish.
+### Locked decisions
+- Premium dark navy / gold interface
+- Large EGP logo
+- Hero uses: “We built a memory game. Then we tested it.”
+- Hero typography is collision-safe
+- No `ARCHIVE_001`
+- No random process arrows
+- No “No podium” language
+- Participant Recognition uses:
+  - “Different minds. Different strengths.”
+- Seven-day YouTube archive remains condensed
+- 50-Digit Finale keeps the cinematic V4 presentation
+- Awards Ceremony remains theater-style
+- Team section keeps the premium editorial treatment
+- Acknowledgments are intentionally concise
+- Acknowledgments fade seamlessly into the final section with no visible seam
+- Final line remains:
+  - “The first pilot is now history.”
 
-## Content
-Edit `data/site-data.js` for:
-- YouTube video IDs
-- participant recognition
-- team bios/roles
-- award photographs
+## Content editing
+Use `data/site-data.js` for:
+- Day 1–7 YouTube IDs
+- Awards Ceremony YouTube ID
+- Participant recognition titles and names
+- Team roles/bios
+- Award-photo paths
 
-Replace `official_logo.png` with the official EGP logo using the same filename.
+## Assets
+Replace:
+- `official_logo.png`
+- `assets/images/team/sid.jpg`
+- `assets/images/team/avanthika.jpg`
+
+Put award photos in:
+- `assets/images/awards/`
+
+Then list them in `data/site-data.js`.
+
+All paths remain GitHub Pages compatible.

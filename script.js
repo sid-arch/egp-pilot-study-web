@@ -125,3 +125,16 @@ document.querySelectorAll(".v6-hero-title > span, .v6-hero-title > em").forEach(
 });
 
 // V6: process rows deliberately have no right-side glyphs/arrows.
+
+
+// FINAL: keep hero motion cinematic, never distorted.
+const finalHeroTitle = document.querySelector(".v6-hero-title");
+if(finalHeroTitle){
+  window.addEventListener("scroll",()=>{
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const y = window.scrollY;
+    if(y < window.innerHeight){
+      finalHeroTitle.style.opacity = String(Math.max(.55,1-y/(window.innerHeight*1.55)));
+    }
+  },{passive:true});
+}

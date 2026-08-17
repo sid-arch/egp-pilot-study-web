@@ -653,3 +653,162 @@ footer{width:min(calc(100% - 48px),var(--max));margin:auto;padding:28px 0 38px;d
     letter-spacing:-.055em!important;
   }
 }
+
+
+/* ============================================================
+   FINAL — PRODUCTION POLISH
+   ============================================================ */
+
+/* Participant recognition: confident, non-competitive */
+.recognition>.lead{
+  max-width:610px!important;
+  color:#9ba6b4;
+}
+
+/* Acknowledgments: less text, more impact */
+.thanks{
+  position:relative;
+  width:100%;
+  max-width:none;
+  padding-left:max(24px,calc((100vw - var(--max))/2));
+  padding-right:max(24px,calc((100vw - var(--max))/2));
+  padding-top:180px!important;
+  padding-bottom:220px!important;
+
+  /* Seamless descent into the ending. */
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2,9,20,0) 0%,
+      rgba(1,7,15,.45) 52%,
+      #01050a 100%
+    )!important;
+
+  border-bottom:0!important;
+  margin-bottom:0!important;
+}
+
+.thanks::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:-2px;
+  height:180px;
+  background:linear-gradient(180deg,rgba(1,5,10,0),#01050a 82%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.thanks>*{
+  position:relative;
+  z-index:1;
+  max-width:var(--max);
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.thanks h2{
+  margin:38px auto 46px!important;
+  max-width:1060px!important;
+  font-size:clamp(58px,7.7vw,108px)!important;
+  line-height:.88!important;
+  letter-spacing:-.06em!important;
+}
+
+.thanks h2 em{
+  color:var(--gold2);
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+
+.thanks>p:last-child{
+  max-width:690px!important;
+  margin-left:auto!important;
+  margin-right:0!important;
+  font-size:17px!important;
+  line-height:1.75!important;
+  color:#aab5c3!important;
+}
+
+/* Remove every visible seam before the ending */
+.end{
+  margin-top:0!important;
+  border-top:0!important;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(216,180,92,.06),transparent 27%),
+    #01050a!important;
+  box-shadow:none!important;
+}
+
+/* Make the join impossible to detect */
+.thanks + .end{
+  margin-top:-1px!important;
+}
+
+/* Final hero safety: strong, spacious, collision-free */
+.v6-hero-title{
+  gap:4px!important;
+}
+.v6-hero-title em{
+  margin-top:22px!important;
+}
+
+/* Remove process arrows and any residual pseudo-content */
+.rail article::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Final subtle line polish */
+.section-id:after{
+  background:linear-gradient(90deg,var(--gold),rgba(216,180,92,0));
+}
+
+/* Slightly calmer glow for a more expensive look */
+.hero h1 em,
+.recognition h2 em,
+.award-head h2 em,
+.thanks h2 em,
+.end h2 em{
+  text-shadow:0 0 48px rgba(216,180,92,.075)!important;
+}
+
+/* Day archive: compact and balanced */
+.day{
+  border-radius:16px!important;
+}
+.day:hover{
+  transform:translateY(-2px)!important;
+}
+
+/* Awards gallery seam-free dark theater */
+.awards{
+  border-bottom:0!important;
+}
+
+/* Footer disappears into the final environment */
+footer{
+  background:#01050a;
+  border-top:1px solid rgba(255,255,255,.06)!important;
+}
+
+/* Mobile acknowledgments */
+@media(max-width:800px){
+  .thanks{
+    padding-top:120px!important;
+    padding-bottom:160px!important;
+  }
+  .thanks>p:last-child{
+    margin-left:0!important;
+    margin-right:auto!important;
+  }
+}
+@media(max-width:560px){
+  .thanks h2{
+    font-size:14vw!important;
+    line-height:.92!important;
+  }
+  .thanks{
+    padding-left:15px!important;
+    padding-right:15px!important;
+  }
+}
