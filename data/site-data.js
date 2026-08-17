@@ -12,8 +12,8 @@ window.EGP_DATA = {
     awardsCeremony: ""
   },
   winners: [
-    { place: "01", name: "Winner Name", title: "Pilot Study Champion" },
-    { place: "02", name: "Winner Name", title: "Second Place" },
+    { place: "01", name: "Saanvi", title: "Most Expressive Storyteller" },
+    { place: "02", name: "Rhea", title: "Most Eloquent Storyteller" },
     { place: "03", name: "Winner Name", title: "Third Place" }
   ],
   team: [
@@ -32,6 +32,8 @@ window.EGP_DATA = {
   ],
   awardsPhotos: [
     // Example:
-    // "assets/images/awards/award-01.jpg"
+    assets/images/awards/award-01.jpg
+    assets/images/awards/award-02.jpg
+    assets/images/awards/award-03.jpg
   ]
 };
